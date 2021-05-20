@@ -17,7 +17,26 @@ const pAequorFactory = (number, array) => {
         number: number,
         array: array,
         mutate() {
-            return returnRandBase();
-        }
+            let newDnaBases = [];
+            const returnNewDnaBase = newDnaBases => {
+                return newDnaBases[Math.floor(Math.random() * 3)];
+            }
+            // select DNA property
+            let dnaProperty = returnRandBase();
+            console.log(dnaProperty);
+            // change the DNA property
+            if (dnaProperty === 'A') {
+                newDnaBases = ['T', 'C', 'G'];
+            } else if (dnaProperty === 'C') {
+                newDnaBases = ['A', 'T', 'G'];
+            } else if (dnaProperty === 'T') {
+                newDnaBases = ['A', 'C', 'G'];
+            } else if (dnaProperty === 'G') {
+                newDnaBases = ['A', 'T', 'C'];
+            }
+            dnaProperty = returnNewDnaBase(newDnaBases);
+            array[0] = dnaProperty;
+            return `dnaProperty: ${dnaProperty}, array: ${array}`;
+        } 
     }
 }; 
