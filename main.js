@@ -42,42 +42,34 @@ const pAequorFactory = (number=1, array = mockUpStrand()) => {
         compareDNA(newPAequor) {
             newPAequor = pAequorFactory();
             let newArray = [];
-            /*
-            if (array.length !== pAequorFactory.array.length) {
-                if (array.length > pAequorFactory.array.length) {
-
+            let getDiff = 0;
+            console.log(newPAequor.array);
+            console.log(array);
+            if (array.length !== newPAequor.array.length) {
+                if (array.length > newPAequor.array.length) {
+                  getDiff = array.length - newPAequor.array.length;
+                  array = array.slice(0, array.length - getDiff);
+                }
+                else if (newPAequor.array.length > array.length){
+                  getDiff = newPAequor.array.length - array.length;
+                  newPAequor.array = newPAequor.array.slice(0, newPAequor.array.length - getDiff);
+                  console.log(`newPAequor array ${newPAequor.array}`);
+                  console.log(getDiff);
                 }
             }
-            */
             for (let i = 0; i < array.length; i++) {
-                for (let j = 0; j < newPAequor.array.length; j++) {
-                    if (array[i] === newPAequor.array[j]) {
-                        newArray.push(newPAequor.array[j]);
-                    }
-                }
+                  if (array[i] === newPAequor.array[i]) {
+                      newArray.push(array[i]);
+                      console.log(newArray);
+                  }
             }
-            return newArray;
+            return "new array " + newArray;
         }
     }
 }; 
-
-
-
-
-const firstFactory = pAequorFactory(2, ['A', 'T', 'C', 'C']);
+const firstFactory = pAequorFactory(2, ['G', 'A', 'T', 'C', 'C', 'G', 'A', 'T', 'C', 'C', 'G', 'A', 'T', 'C', 'C', 'G', 'A', 'T', 'C', 'C']);
 //console.log(firstFactory.mutate());
 //console.log(firstFactory.number);
 
 console.log(firstFactory.mutate());
 console.log(firstFactory.compareDNA());
-//console.log(returnRandBase());
-//console.log(mockUpStrand());
-//const secondFactory = pAequorFactory(3);
-//console.log(secondFactory.mutate());
-
-const array1 = ['a', 'b', 'c', 'd'];
-const array2 = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
-const getDiff = array2.length - array1.length;
-console.log(getDiff);
-console.log(array2.slice(0, getDiff + 1));
-console.log(array1);
