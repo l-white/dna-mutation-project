@@ -63,7 +63,8 @@ const pAequorFactory = (number=1, array = mockUpStrand()) => {
                       console.log(newArray);
                   }
             }
-            return "new array " + newArray;
+            const sharedDNAPercentage = newArray.length / array.length * 100;
+            return `The two specimens have ${sharedDNAPercentage.toFixed(2)} percent DNA in common.`;
         }
     }
 }; 
