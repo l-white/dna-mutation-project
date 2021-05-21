@@ -1,17 +1,19 @@
+// Returns a random DNA base
 const returnRandBase = () => {
-    const dnaBases = ['A', 'T', 'C', 'G'];
-    return dnaBases[Math.floor(Math.random() * 4)];
-};
+  const dnaBases = ['A', 'T', 'C', 'G']
+  return dnaBases[Math.floor(Math.random() * 4)] 
+}
 
 // Returns a random single stand of DNA containing 15 bases
 const mockUpStrand = () => {
-    const newStrand = [];
-    for (let i = 0; i < 15; i++) {
-        newStrand.push(returnRandBase());
-    }
-    return newStrand;
-};
-
+  const newStrand = []
+  for (let i = 0; i < 15; i++) {
+    newStrand.push(returnRandBase())
+  }
+  return newStrand
+}
+let newArray = [];
+// pAequor factor function
 const pAequorFactory = (number=1, array = mockUpStrand()) => {
     return {
         number: number,
@@ -41,10 +43,8 @@ const pAequorFactory = (number=1, array = mockUpStrand()) => {
         },
         compareDNA(newPAequor) {
             newPAequor = pAequorFactory();
-            let newArray = [];
+            //let newArray = [];
             let getDiff = 0;
-            console.log(newPAequor.array);
-            console.log(array);
             if (array.length !== newPAequor.array.length) {
                 if (array.length > newPAequor.array.length) {
                   getDiff = array.length - newPAequor.array.length;
@@ -54,23 +54,19 @@ const pAequorFactory = (number=1, array = mockUpStrand()) => {
                   getDiff = newPAequor.array.length - array.length;
                   newPAequor.array = newPAequor.array.slice(0, newPAequor.array.length - getDiff);
                   console.log(`newPAequor array ${newPAequor.array}`);
-                  console.log(getDiff);
                 }
             }
             for (let i = 0; i < array.length; i++) {
                   if (array[i] === newPAequor.array[i]) {
                       newArray.push(array[i]);
-                      console.log(newArray);
                   }
             }
             const sharedDNAPercentage = newArray.length / array.length * 100;
             return `The two specimens have ${sharedDNAPercentage.toFixed(2)} percent DNA in common.`;
+        },
+        willLikelySurvive(){
+          const survivalRate = newArray.filter(element => element === 'C' || element === 'G');
+          return survivalRate.length / newArray.length >= 0.6;
         }
     }
-}; 
-const firstFactory = pAequorFactory(2, ['G', 'A', 'T', 'C', 'C', 'G', 'A', 'T', 'C', 'C', 'G', 'A', 'T', 'C', 'C', 'G', 'A', 'T', 'C', 'C']);
-//console.log(firstFactory.mutate());
-//console.log(firstFactory.number);
-
-console.log(firstFactory.mutate());
-console.log(firstFactory.compareDNA());
+};
